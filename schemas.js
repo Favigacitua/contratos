@@ -1,298 +1,327 @@
-
-import { response } from "express"
-import { request } from "http"
-
+import { response } from "express";
+import { request } from "http";
 
 // get viajes
 response = {
-  "type": "object",
-  "properties": {
-    "viajes": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
+  type: "object",
+  properties: {
+    viajes: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "number",
           },
-          "nombre": {
-            "type": "string"
+          nombre: {
+            type: "string",
           },
-          "precio": { 
-            "type": "number"
-          }
+          descripcion: {
+            type: "string",
+          },
+          precio: {
+            type: "number",
+          },
+          imagen: {
+            type: "string",
+            description: "URL de la imagen del viaje",
+          },
         },
-        "required": [
-          "id",
-          "nombre",
-          "precio" 
-        ]
-      }
-    }
+        required: ["id", "nombre", "descripcion", "precio", "imagen"],
+      },
+    },
   },
-  "required": [
-    "viajes"
-  ]
-}
+  required: ["viajes"],
+};
 
 // get viaje
 response = {
-  "type": "object",
-  "properties": {
-    "id": {
-      "type": "number"
+  type: "object",
+  properties: {
+    id: {
+      type: "number",
     },
-    "nombre": {
-      "type": "string"
+    nombre: {
+      type: "string",
     },
-    "precio": { 
-      "type": "number"
-    }
+    descripcion: {
+      type: "string",
+    },
+    precio: {
+      type: "number",
+    },
+    imagen: {
+      type: "string",
+      description: "URL de la imagen del viaje",
+    },
   },
-  "required": [
-    "id",
-    "nombre",
-    "precio" 
-  ]
-}
+  required: ["id", "nombre", "descripcion", "precio", "imagen"],
+};
 
 // get favoritos
-response = {
-  "type": "object",
-  "properties": {
-    "favoritos": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "productId": { "type": "string" },
-          "nombre": { "type": "string" },
-          "precio": { 
-            "type": "number"
-          }
-        },
-        "required": ["productId", "nombre", "precio"] 
-      }
-    }
+header = {
+  type: "object",
+  properties: {
+    Authorization: {
+      type: "string",
+    },
   },
-  "required": [
-    "favoritos"
-  ]
-}
+  required: ["Authorization"],
+};
+response = {
+  type: "object",
+  properties: {
+    user: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        nombre: { type: "string" },
+        email: { type: "string" },
+      },
+      required: ["id", "nombre", "email"],
+    },
+    viajes: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: { type: "number" },
+          nombre: { type: "string" },
+          descripcion: { type: "string" },
+          precio: { type: "number" },
+          imagen: {
+            type: "string",
+            description: "URL de la imagen del viaje",
+          },
+        },
+        required: ["id", "nombre", "descripcion", "precio", "imagen"],
+      },
+    },
+  },
+  required: ["user", "viajes"],
+};
 
 // get mis viajes
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": {
-      "type": "string"
-    }
+  type: "object",
+  properties: {
+    Authorization: {
+      type: "string",
+    },
   },
-  "required": [
-    "Authorization"
-  ]
-}
+  required: ["Authorization"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "user": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "nombre": { "type": "string" },
-        "email": { "type": "string" }
+  type: "object",
+  properties: {
+    user: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        nombre: { type: "string" },
+        email: { type: "string" },
       },
-      "required": ["id", "nombre", "email"]
+      required: ["id", "nombre", "email"],
     },
-    "viajes": {
-      "type": "array",
-      "items": {} 
-    }
+    viajes: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: { type: "number" },
+          nombre: { type: "string" },
+          precio: { type: "number" },
+          imagen: {
+            type: "string",
+            description: "URL de la imagen del viaje",
+          },
+        },
+        required: ["id", "nombre", "precio", "imagen"],
+      },
+    },
   },
-  "required": ["user", "viajes"]
-}
+  required: ["user", "viajes"],
+};
 
 // post login
-request = 
-payload={
-  "type": "object",
-  "properties": {
-    "email": { "type": "string" },
-    "password": { "type": "string" }
+request = payload = {
+  type: "object",
+  properties: {
+    email: { type: "string" },
+    password: { type: "string" },
   },
-  "required": ["email", "password"]
-}
+  required: ["email", "password"],
+};
 
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" },
-    "Content-Type": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string" },
   },
-  "required": ["Authorization", "Content-Type"]
-}
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "token": { "type": "string" },
-    "user": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "nombre": { "type": "string" },
-        "email": { "type": "string" }
+  type: "object",
+  properties: {
+    token: { type: "string" },
+    user: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        nombre: { type: "string" },
+        email: { type: "string" },
       },
-      "required": ["id", "nombre", "email"]
-    }
+      required: ["id", "nombre", "email"],
+    },
   },
-  "required": ["token", "user"]
-}
+  required: ["token", "user"],
+};
 
 // post register
-request =
-payload= {
-  "type": "object",
-  "properties": {
-    "email": { "type": "string" },
-    "nombre": { "type": "string" },
-    "password": { "type": "string" },
-    "repetir password": { "type": "string" }
+request = payload = {
+  type: "object",
+  properties: {
+    email: { type: "string" },
+    nombre: { type: "string" },
+    password: { type: "string" },
+    "repetir password": { type: "string" },
   },
-  "required": ["email", "nombre", "password", "repetir password"]
-}
+  required: ["email", "nombre", "password", "repetir password"],
+};
 
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" },
-    "Content-Type": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string" },
   },
-  "required": ["Authorization", "Content-Type"]
-}
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "token": { "type": "string" },
-    "user": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "nombre": { "type": "string" },
-        "email": { "type": "string" }
+  type: "object",
+  properties: {
+    token: { type: "string" },
+    user: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        nombre: { type: "string" },
+        email: { type: "string" },
       },
-      "required": ["id", "nombre", "email"]
-    }
+      required: ["id", "nombre", "email"],
+    },
   },
-  "required": ["token", "user"]
-}
+  required: ["token", "user"],
+};
 
 // post favoritos
-request = 
-payload={
-  "type": "object",
-  "properties": {
-    "userId": { "type": "string" },
-    "productId": { "type": "string" }
+request = payload = {
+  type: "object",
+  properties: {
+    userId: { type: "string" },
+    productId: { type: "string" },
   },
-  "required": ["userId", "productId"]
-}
+  required: ["userId", "productId"],
+};
 
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" },
-    "Content-Type": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string" },
   },
-  "required": ["Authorization", "Content-Type"]
-}
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "message": { "type": "string" }
+  type: "object",
+  properties: {
+    message: { type: "string" },
   },
-  "required": ["message"]
-}
+  required: ["message"],
+};
 
 // delete favoritos
-request = 
-payload={
-  "type": "object",
-  "properties": {
-    "userId": { "type": "string" },
-    "productId": { "type": "string" }
+request = payload = {
+  type: "object",
+  properties: {
+    userId: { type: "string" },
+    productId: { type: "string" },
   },
-  "required": ["userId", "productId"]
-}
+  required: ["userId", "productId"],
+};
 
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" },
-    "Content-Type": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string" },
   },
-  "required": ["Authorization", "Content-Type"]
-}
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "message": { "type": "string" },
-    "favoritos": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "productId": { "type": "string" },
-          "nombre": { "type": "string" },
-          "precio": {
-            "type": "number"
-          }
+  type: "object",
+  properties: {
+    message: { type: "string" },
+    favoritos: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          productId: { type: "string" },
+          nombre: { type: "string" },
+          descripcion: { type: "string" },
+          precio: { type: "number" },
+          imagen: {
+            type: "string",
+            description: "URL de la imagen del producto",
+          },
         },
-        "required": ["productId", "nombre", "precio"]
-      }
-    }
+        required: ["productId", "nombre", "descripcion", "precio", "imagen"],
+      },
+    },
   },
-  "required": ["message", "favoritos"]
-}
+  required: ["message", "favoritos"],
+};
 
 // Put datos personales
-request =
-payload= {
-  "type": "object",
-  "properties": {
-    "nombre": { "type": "string" },
-    "email": { "type": "string" },
-    "password": { "type": "string" }
+request = payload = {
+  type: "object",
+  properties: {
+    nombre: { type: "string" },
+    email: { type: "string" },
+    password: { type: "string" },
   },
-  "required": ["nombre", "email", "password"]
-}
+  required: ["nombre", "email", "password"],
+};
 
 header = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" },
-    "Content-Type": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string" },
   },
-  "required": ["Authorization", "Content-Type"]
-}
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "message": { "type": "string" },
-    "user": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "nombre": { "type": "string" },
-        "email": { "type": "string" }
+  type: "object",
+  properties: {
+    message: { type: "string" },
+    user: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        nombre: { type: "string" },
+        email: { type: "string" },
       },
-      "required": ["id", "nombre", "email"]
-    }
+      required: ["id", "nombre", "email"],
+    },
   },
-  "required": ["message", "user"]
-}
+  required: ["message", "user"],
+};
