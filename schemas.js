@@ -1,6 +1,36 @@
 import { response } from "express";
 import { request } from "http";
 
+
+// get usuarios
+
+
+request = {
+  "type": "object",
+  "properties": {
+    "Authorization": { "type": "string" }
+  },
+  "required": ["Authorization"]
+}
+
+response = {
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "nombre": { "type": "string" },
+    "apellido": { "type": "string" },
+    "email": { "type": "string" },
+    "imagen": {
+      "type": "string",
+      "description": "URL de la imagen del usuario"
+    }
+  },
+  "required": ["id", "nombre", "apellido", "email", "imagen"]
+}
+
+
+
+
 // get viajes
 response = {
   type: "object",
@@ -338,7 +368,7 @@ response = {
   required: ["message", "favoritos"],
 };
 
-// Put datos personales
+// Put usuarios
 request = payload = {
   type: "object",
   properties: {
@@ -346,8 +376,13 @@ request = payload = {
     apellido: { type: "string" },
     email: { type: "string" },
     password: { type: "string" },
+    imagen: {
+      type: "string",
+      description: "URL de la imagen del producto",
+    },
+    
   },
-  required: ["nombre","apellido", "email", "password"],
+  required: ["nombre","apellido", "email", "password", "imagen"],
 };
 
 header = {
@@ -370,8 +405,12 @@ response = {
         nombre: { type: "string" },
         apellido: { type: "string" },
         email: { type: "string" },
+        imagen: {
+          type: "string",
+          description: "URL de la imagen del producto",
+        },
       },
-      required: ["id", "nombre", "apellido", "email"],
+      required: ["id", "nombre", "apellido", "email", "imagen"],
     },
   },
   required: ["message", "user"],
@@ -414,7 +453,7 @@ response = {
       required: ["id", "nombre","destino","valoracion", "descripcion"],
     },
   },
-  required: ["message", "reseña"],
+  required: ["message", "reseñas"],
 };
 
 // delete mis reseñas
