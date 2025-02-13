@@ -35,6 +35,22 @@ app.get('/favoritos', (req, res)=>{
     })
 })
 
+// get mis reseñas
+
+app.get('/mis-reseñas', (req, res)=>{
+    res.json({
+        reseñas: []
+    })
+})
+
+// get reseñas
+
+app.get('/reseñas', (req, res)=>{
+    res.json({
+        reseñas: []
+    })
+})
+
 // get mis viajes 
 
 app.get('/mis-viajes', (req, res) => {
@@ -111,6 +127,27 @@ app.put('/usuarios/:id', (req, res) => {
         }
     });
 });
+
+//post mis reseñas 
+app.post('/mis-reseñas', (req, res)=>{
+    res.json ({
+        message: "añadido con exito",
+        reseñas: []
+      })
+})
+
+// delete mis reseñas 
+
+app.delete('/mis-reseñas/:id', (req, res)=>{
+    res.json ({
+        message: "eliminado con exito",
+        reseñas: []
+
+      })
+})
+
+
+
 
 
 
