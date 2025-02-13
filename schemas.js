@@ -1,35 +1,30 @@
 import { response } from "express";
 import { request } from "http";
 
-
 // get usuarios
 
-
 request = {
-  "type": "object",
-  "properties": {
-    "Authorization": { "type": "string" }
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
   },
-  "required": ["Authorization"]
-}
+  required: ["Authorization"],
+};
 
 response = {
-  "type": "object",
-  "properties": {
-    "id": { "type": "string" },
-    "nombre": { "type": "string" },
-    "apellido": { "type": "string" },
-    "email": { "type": "string" },
-    "imagen": {
-      "type": "string",
-      "description": "URL de la imagen del usuario"
-    }
+  type: "object",
+  properties: {
+    id: { type: "string" },
+    nombre: { type: "string" },
+    apellido: { type: "string" },
+    email: { type: "string" },
+    imagen: {
+      type: "string",
+      description: "URL de la imagen del usuario",
+    },
   },
-  "required": ["id", "nombre", "apellido", "email", "imagen"]
-}
-
-
-
+  required: ["id", "nombre", "apellido", "email", "imagen"],
+};
 
 // get viajes
 response = {
@@ -40,10 +35,10 @@ response = {
       items: {
         type: "object",
         properties: {
-          id: {type: "number",},
-          destino: {type: "string", },
-          descripcion: { type: "string",},
-          precio: {type: "number",},
+          id: { type: "number" },
+          destino: { type: "string" },
+          descripcion: { type: "string" },
+          precio: { type: "number" },
           imagen: {
             type: "string",
             description: "URL de la imagen del viaje",
@@ -140,40 +135,67 @@ response = {
       items: {
         type: "object",
         properties: {
+          usuario_id: {
+            type: "integer",
+            description: "ID único del usuario que hizo la reseña",
+          },
           nombre: { type: "string" },
           apellido: { type: "string" },
           destino: { type: "string" },
           valoracion: { type: "number" },
           descripcion: { type: "string" },
         },
-        required: ["nombre","apellido","destino", "valoracion", "descripcion"],
+        required: [
+          "usuario_id",
+          "nombre",
+          "apellido",
+          "destino",
+          "valoracion",
+          "descripcion",
+        ],
       },
     },
   },
   required: ["reseñas"],
 };
 
-// get reseñas
+// get una sola reseña propia en detalle
+
+header = {
+  type: "object",
+  properties: {
+    Authorization: { type: "string" },
+    "Content-Type": { type: "string", enum: ["application/json"] },
+  },
+  required: ["Authorization", "Content-Type"],
+};
 
 response = {
   type: "object",
   properties: {
-    reseñas: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          nombre: { type: "string" },
-          apellido: { type: "string" },
-          destino: { type: "string" },
-          valoracion: { type: "number" },
-          descripcion: { type: "string" },
-        },
-        required: ["nombre","apellido","destino", "valoracion", "descripcion"],
+    reseña: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        usuario_id: { type: "integer" },
+        nombre: { type: "string" },
+        apellido: { type: "string" },
+        destino: { type: "string" },
+        valoracion: { type: "number" },
+        descripcion: { type: "string" },
       },
+      required: [
+        "id",
+        "usuario_id",
+        "nombre",
+        "apellido",
+        "destino",
+        "valoracion",
+        "descripcion",
+      ],
     },
   },
-  required: ["reseñas"],
+  required: ["reseña"],
 };
 
 // get mis viajes
@@ -380,9 +402,8 @@ request = payload = {
       type: "string",
       description: "URL de la imagen del producto",
     },
-    
   },
-  required: ["nombre","apellido", "email", "password", "imagen"],
+  required: ["nombre", "apellido", "email", "password", "imagen"],
 };
 
 header = {
@@ -425,7 +446,7 @@ request = payload = {
     valoracion: { type: "number", minimum: 1, maximum: 5 },
     descripcion: { type: "string" },
   },
-  required: ["nombre","destino", "valoracion", "descripcion"],
+  required: ["nombre", "destino", "valoracion", "descripcion"],
 };
 
 header = {
@@ -450,7 +471,7 @@ response = {
         valoracion: { type: "number" },
         descripcion: { type: "string" },
       },
-      required: ["id", "nombre","destino","valoracion", "descripcion"],
+      required: ["id", "nombre", "destino", "valoracion", "descripcion"],
     },
   },
   required: ["message", "reseñas"],
@@ -491,7 +512,13 @@ response = {
           valoracion: { type: "number" },
           descripcion: { type: "string" },
         },
-        required: ["reviewId", "nombre","destino", "valoracion", "descripcion"],
+        required: [
+          "reviewId",
+          "nombre",
+          "destino",
+          "valoracion",
+          "descripcion",
+        ],
       },
     },
   },
